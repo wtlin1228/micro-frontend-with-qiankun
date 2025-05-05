@@ -1,14 +1,16 @@
 import { registerMicroApps, RegistrableApp, start } from "qiankun";
 import { useEffect } from "react";
 
+const APP_CONTAINER = "app-container";
+
 const registerableApps: RegistrableApp<{
   displayName: string;
 }>[] = [
   {
     name: "kirby app",
     entry: "/app-statics/kirby/index.html",
-    container: "#kirby-app-container",
-    activeRule: "/kirby",
+    container: `#${APP_CONTAINER}`,
+    activeRule: "/app/kirby",
     props: {
       displayName: "KIRBY",
     },
@@ -16,8 +18,8 @@ const registerableApps: RegistrableApp<{
   {
     name: "pikmin app",
     entry: "/app-statics/pikmin/index.html",
-    container: "#pikmin-app-container",
-    activeRule: "/pikmin",
+    container: `#${APP_CONTAINER}`,
+    activeRule: "/app/pikmin",
     props: {
       displayName: "PIKMIN",
     },
@@ -27,13 +29,12 @@ const registerableApps: RegistrableApp<{
 export const MicroApps = () => {
   useEffect(() => {
     registerMicroApps(registerableApps);
-    start();
+    start({ prefetch: false });
   }, []);
 
   return (
     <>
-      <div id="kirby-app-container"></div>
-      <div id="pikmin-app-container"></div>
+      <div id={APP_CONTAINER}></div>
     </>
   );
 };
