@@ -29839,6 +29839,11 @@
     registerStyles(cache, serialized, isStringTag2);
     var className = cache.key + "-" + serialized.name;
     if (cache.inserted[serialized.name] === void 0) {
+      console.log(
+        "\x1b[31m%s\x1b[0m",
+        `cache missed, start insert ${serialized.name}`
+      );
+
       var current = serialized;
       do {
         cache.insert(
@@ -29849,6 +29854,11 @@
         );
         current = current.next;
       } while (current !== void 0);
+    } else {
+      console.log(
+        "\x1b[32m%s\x1b[0m",
+        `cache hit, don't need to insert ${serialized.name}`
+      );
     }
   };
   function murmur2(str) {
@@ -30392,6 +30402,8 @@
       isStringTag2 = _ref.isStringTag;
     registerStyles(cache, serialized, isStringTag2);
     useInsertionEffectAlwaysWithSyncFallback(function () {
+      console.log("try to insertStyles, serialized =", serialized);
+
       return insertStyles(cache, serialized, isStringTag2);
     });
     return null;

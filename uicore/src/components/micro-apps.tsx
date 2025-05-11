@@ -10,6 +10,9 @@ const registerableApps: RegistrableApp<{
     name: "kirby app",
     entry: "/app-statics/kirby/index.html",
     container: `#${APP_CONTAINER}`,
+    loader: (loading) => {
+      console.log("RegistrableApp::loader::kirbyApp", loading);
+    },
     activeRule: "/app/kirby",
     props: {
       displayName: "KIRBY",
@@ -19,6 +22,9 @@ const registerableApps: RegistrableApp<{
     name: "pikmin app",
     entry: "/app-statics/pikmin/index.html",
     container: `#${APP_CONTAINER}`,
+    loader: (loading) => {
+      console.log("RegistrableApp::loader::pikminApp", loading);
+    },
     activeRule: "/app/pikmin",
     props: {
       displayName: "PIKMIN",
