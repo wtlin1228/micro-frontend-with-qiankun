@@ -15,12 +15,13 @@ export default defineConfig({
     lib: {
       entry: "src/main.tsx",
       formats: ["umd"],
-      name: "pikmin",
+      name: "kirby",
     },
-    rollupOptions: {
-      output: {
-        dir: "../../uicore/public/app-statics/pikmin",
-      },
-    },
+  },
+  server: {
+    port: 3001,
+  },
+  preview: {
+    port: 3001,
   },
 });

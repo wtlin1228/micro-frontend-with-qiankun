@@ -8,7 +8,7 @@ const registerableApps: RegistrableApp<{
 }>[] = [
   {
     name: "kirby app",
-    entry: "/app-statics/kirby/index.html",
+    entry: "http://localhost:3001/index.html",
     container: `#${APP_CONTAINER}`,
     loader: (loading) => {
       console.log("RegistrableApp::loader::kirbyApp", loading);
@@ -20,7 +20,7 @@ const registerableApps: RegistrableApp<{
   },
   {
     name: "pikmin app",
-    entry: "/app-statics/pikmin/index.html",
+    entry: "http://localhost:3002/index.html",
     container: `#${APP_CONTAINER}`,
     loader: (loading) => {
       console.log("RegistrableApp::loader::pikminApp", loading);
