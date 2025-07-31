@@ -2,6 +2,5 @@
 
 ```
 pnpm i
-pnpm build
-pnpm preview
+pnpm all
 ```
