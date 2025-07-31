@@ -7,6 +7,7 @@ import {
 } from "react";
 
 type Item = {
+  pushedBy: string;
   title: string;
   onClick: () => void;
 };
@@ -18,10 +19,14 @@ type State = {
 type Action =
   | {
       type: "PUSH";
-      payload: { title: string; onClick: () => void };
+      payload: { pushedBy: string; title: string; onClick: () => void };
     }
   | {
       type: "POP";
+    }
+  | {
+      type: "UNMOUNT APP";
+      payload: { appId: string };
     };
 
 const BreadcrumbContext = createContext<{
@@ -40,6 +45,8 @@ export const useBreadcrumb = () => {
 const reducer = (state: State, action: Action) => {
   switch (action.type) {
     case "POP":
+      console.log(`Pop`, state);
+
       const len = state.items.length;
       if (len === 0) {
         return state;
@@ -50,9 +57,19 @@ const reducer = (state: State, action: Action) => {
         };
       }
     case "PUSH":
+      console.log(`Push ${action.payload.title}`, state);
+
       return {
         ...state,
         items: [...state.items, action.payload],
+      };
+    case "UNMOUNT APP":
+      console.log(`Unmount App ${action.payload.appId}`, state);
+      return {
+        ...state,
+        items: state.items.filter(
+          (item) => item.pushedBy !== action.payload.appId
+        ),
       };
     default:
       return state;

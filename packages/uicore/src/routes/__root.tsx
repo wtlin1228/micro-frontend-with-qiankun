@@ -15,10 +15,12 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   onEnter: ({ context }) => {
+    console.log("onEnter::uicore::root");
     const title = context.i18n._({ id: "home", message: "Home" });
     context.breadcrumb.dispatch({
       type: "PUSH",
       payload: {
+        pushedBy: "uicore",
         title,
         onClick: () => {
           router.navigate({ to: "/" });
@@ -26,7 +28,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     });
   },
-  onLeave: () => {},
+  onLeave: () => {
+    console.log("onLeave::uicore::root");
+  },
   component: () => (
     <>
       <div style={{ display: "flex", gap: "8px", marginBlock: "8px" }}>

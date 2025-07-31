@@ -53,8 +53,10 @@ export async function mount(props: {
  * Methods that are called each time the application is switched/unloaded,
  * usually in this case we uninstall the application instance of the subapplication.
  */
-export async function unmount(props: any) {
+export async function unmount(props: { dispatch: Dispatch }) {
   log("kirby app unmount", props);
+
+  props.dispatch({ type: "UNMOUNT APP", payload: { appId: "kirby" } });
 
   if (root) {
     root.unmount();

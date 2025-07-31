@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pnpm -r run build",
     "preview": "pnpm -r run preview",
-    "dev": "pnpm -r run dev"
+    "dev": "pnpm -r run dev",
+    "all": "pnpm -r run all"
   },
   "keywords": [],
   "author": "",

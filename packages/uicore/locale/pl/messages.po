@@ -14,11 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/app/$appId.tsx:6
+#: src/routes/app/$appId.tsx:7
 msgid "apps"
 msgstr "Aplikacje"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:18
+#: src/routes/__root.tsx:19
 msgid "home"
 msgstr "Strona główna"
