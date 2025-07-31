@@ -1,26 +1,35 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-import { BreadcrumbProvider } from "./components/breadcrumb";
+import { RouterProvider } from "@tanstack/react-router";
+import { BreadcrumbProvider, useBreadcrumb } from "./components/breadcrumb";
+import { useLingui } from "@lingui/react/macro";
+import { I18nProvider } from "@lingui/react";
+import { i18n } from "@lingui/core";
+import { loadCatalog } from "./i18n";
+import { router } from "./router";
 
-const router = createRouter({ routeTree });
+const RouterWithContext = () => {
+  const breadcrumb = useBreadcrumb();
+  const { i18n } = useLingui();
+  return <RouterProvider router={router} context={{ breadcrumb, i18n }} />;
+};
 
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
+const main = async () => {
+  await loadCatalog("en");
+
+  const rootElement = document.getElementById("root")!;
+  if (!rootElement.innerHTML) {
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(
+      <StrictMode>
+        <I18nProvider i18n={i18n}>
+          <BreadcrumbProvider>
+            <RouterWithContext />
+          </BreadcrumbProvider>
+        </I18nProvider>
+      </StrictMode>
+    );
   }
-}
+};
 
-// Render the app
-const rootElement = document.getElementById("root")!;
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <BreadcrumbProvider>
-        <RouterProvider router={router} />
-      </BreadcrumbProvider>
-    </StrictMode>
-  );
-}
+main();

@@ -1,15 +1,34 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createRootRouteWithContext,
+  Link,
+  Outlet,
+} from "@tanstack/react-router";
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { MicroApps } from "../components/micro-apps";
-import { Breadcrumb } from "../components/breadcrumb";
+import { Breadcrumb, useBreadcrumb } from "../components/breadcrumb";
+import { I18n } from "@lingui/core";
 
-export const Route = createRootRoute({
-  onEnter: () => {
-    console.log("root:onEnter");
+interface MyRouterContext {
+  breadcrumb: ReturnType<typeof useBreadcrumb>;
+  i18n: I18n;
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
+  onEnter: ({ context }) => {
+    const title = context.i18n._({ id: "workspace", message: "Workspace" });
+    context.breadcrumb.dispatch({
+      type: "PUSH",
+      payload: {
+        item: {
+          title,
+          onClick: () => {
+            console.log("navigate to workspace");
+          },
+        },
+      },
+    });
   },
-  onLeave: () => {
-    console.log("root:onLeave");
-  },
+  onLeave: () => {},
   component: () => (
     <>
       <div>
