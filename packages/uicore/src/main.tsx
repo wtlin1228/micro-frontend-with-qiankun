@@ -5,7 +5,7 @@ import { BreadcrumbProvider, useBreadcrumb } from "./components/breadcrumb";
 import { useLingui } from "@lingui/react/macro";
 import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
-import { loadCatalog } from "./i18n";
+import { getLocale, loadCatalog, setLocale } from "./i18n";
 import { router } from "./router";
 
 const RouterWithContext = () => {
@@ -15,7 +15,7 @@ const RouterWithContext = () => {
 };
 
 const main = async () => {
-  await loadCatalog("en");
+  await loadCatalog(getLocale());
 
   const rootElement = document.getElementById("root")!;
   if (!rootElement.innerHTML) {
@@ -23,6 +23,20 @@ const main = async () => {
     root.render(
       <StrictMode>
         <I18nProvider i18n={i18n}>
+          <button
+            onClick={() => {
+              setLocale("en");
+            }}
+          >
+            en
+          </button>
+          <button
+            onClick={() => {
+              setLocale("pl");
+            }}
+          >
+            pl
+          </button>
           <BreadcrumbProvider>
             <RouterWithContext />
           </BreadcrumbProvider>

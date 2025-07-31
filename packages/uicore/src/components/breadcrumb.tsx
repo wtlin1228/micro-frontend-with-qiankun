@@ -18,11 +18,10 @@ type State = {
 type Action =
   | {
       type: "PUSH";
-      payload: { item: Item };
+      payload: { title: string; onClick: () => void };
     }
   | {
       type: "POP";
-      payload: never;
     };
 
 const BreadcrumbContext = createContext<{
@@ -53,7 +52,7 @@ const reducer = (state: State, action: Action) => {
     case "PUSH":
       return {
         ...state,
-        items: [...state.items, action.payload.item],
+        items: [...state.items, action.payload],
       };
     default:
       return state;

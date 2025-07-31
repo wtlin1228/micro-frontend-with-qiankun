@@ -1,11 +1,23 @@
 import { Outlet, createFileRoute } from "@tanstack/react-router";
+import { router } from "../../router";
 
 export const Route = createFileRoute("/app/$appId")({
-  onEnter: () => {
-    console.log("app:onEnter");
+  onEnter: ({ context }) => {
+    const title = context.i18n._({ id: "apps", message: "Apps" });
+    context.breadcrumb.dispatch({
+      type: "PUSH",
+      payload: {
+        title,
+        onClick: () => {
+          router.navigate({ to: "/app" });
+        },
+      },
+    });
   },
-  onLeave: () => {
-    console.log("app:onLeave");
+  onLeave: ({ context }) => {
+    context.breadcrumb.dispatch({
+      type: "POP",
+    });
   },
   component: AppLayoutComponent,
 });

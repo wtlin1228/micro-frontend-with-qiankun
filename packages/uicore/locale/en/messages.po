@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:18
-msgid "workspace"
-msgstr "Workspace"
+#: src/routes/app/$appId.tsx:6
+msgid "apps"
+msgstr "Apps"
+
+#. js-lingui-explicit-id
+#: src/routes/__root.tsx:19
+msgid "home"
+msgstr "Home"

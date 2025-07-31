@@ -7,6 +7,7 @@ import {
 import { MicroApps } from "../components/micro-apps";
 import { Breadcrumb, useBreadcrumb } from "../components/breadcrumb";
 import { I18n } from "@lingui/core";
+import { router } from "../router";
 
 interface MyRouterContext {
   breadcrumb: ReturnType<typeof useBreadcrumb>;
@@ -15,15 +16,13 @@ interface MyRouterContext {
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   onEnter: ({ context }) => {
-    const title = context.i18n._({ id: "workspace", message: "Workspace" });
+    const title = context.i18n._({ id: "home", message: "Home" });
     context.breadcrumb.dispatch({
       type: "PUSH",
       payload: {
-        item: {
-          title,
-          onClick: () => {
-            console.log("navigate to workspace");
-          },
+        title,
+        onClick: () => {
+          router.navigate({ to: "/" });
         },
       },
     });

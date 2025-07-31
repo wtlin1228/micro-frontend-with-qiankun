@@ -1,5 +1,14 @@
 import { i18n } from "@lingui/core";
 
+export const setLocale = (locale: string) => {
+  localStorage.setItem("locale", locale);
+  location.reload();
+};
+
+export const getLocale = (): string => {
+  return localStorage.getItem("locale") ?? "en";
+};
+
 /**
  * Load messages for requested locale and activate it.
  * This function isn't part of the LinguiJS library because there are
