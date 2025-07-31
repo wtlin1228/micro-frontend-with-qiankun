@@ -16,7 +16,6 @@
     "@lingui/core": "^5.3.3",
     "@lingui/react": "^5.3.3",
     "@tanstack/react-router": "^1.119.0",
-    "@tanstack/react-router-devtools": "^1.119.1",
     "qiankun": "^2.10.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

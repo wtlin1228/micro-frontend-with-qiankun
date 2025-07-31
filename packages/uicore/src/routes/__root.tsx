@@ -3,7 +3,6 @@ import {
   Link,
   Outlet,
 } from "@tanstack/react-router";
-// import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { MicroApps } from "../components/micro-apps";
 import { Breadcrumb, useBreadcrumb } from "../components/breadcrumb";
 import { I18n } from "@lingui/core";
@@ -30,7 +29,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   onLeave: () => {},
   component: () => (
     <>
-      <div>
+      <div style={{ display: "flex", gap: "8px", marginBlock: "8px" }}>
+        <p style={{ display: "inline", margin: 0 }}>Navigation:</p>
         <Link to="/">Home</Link>
         <Link
           to="/app/$appId"
@@ -53,7 +53,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       <Breadcrumb />
       <Outlet />
       <MicroApps />
-      {/* <TanStackRouterDevtools /> */}
     </>
   ),
 });

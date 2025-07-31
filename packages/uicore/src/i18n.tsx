@@ -18,3 +18,25 @@ export async function loadCatalog(locale: string) {
   const { messages } = await import(`../locale/${locale}/messages.po`);
   i18n.loadAndActivate({ locale, messages });
 }
+
+export const LocaleSwitch = () => {
+  return (
+    <div style={{ display: "flex", gap: "8px", marginBlock: "8px" }}>
+      <p style={{ display: "inline", margin: 0 }}>Switch language:</p>
+      <button
+        onClick={() => {
+          setLocale("en");
+        }}
+      >
+        en
+      </button>
+      <button
+        onClick={() => {
+          setLocale("pl");
+        }}
+      >
+        pl
+      </button>
+    </div>
+  );
+};

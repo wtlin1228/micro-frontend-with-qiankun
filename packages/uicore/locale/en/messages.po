@@ -19,6 +19,6 @@ msgid "apps"
 msgstr "Apps"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:19
+#: src/routes/__root.tsx:18
 msgid "home"
 msgstr "Home"

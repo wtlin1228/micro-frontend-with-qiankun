@@ -75,7 +75,8 @@ export const Breadcrumb = () => {
   const { state } = useBreadcrumb();
 
   return (
-    <div>
+    <div style={{ display: "flex", gap: "8px", marginBlock: "8px" }}>
+      <p style={{ display: "inline", margin: 0 }}>Breadcrumb:</p>
       {state.items.map((item) => (
         <button key={item.title} onClick={item.onClick}>
           {item.title}
