@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AsyncRouteImport } from './routes/async'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppAppIdRouteImport } from './routes/app/$appId'
 
+const AsyncRoute = AsyncRouteImport.update({
+  id: '/async',
+  path: '/async',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -31,36 +37,47 @@ const AppAppIdRoute = AppAppIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/async': typeof AsyncRoute
   '/app/$appId': typeof AppAppIdRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/async': typeof AsyncRoute
   '/app/$appId': typeof AppAppIdRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/async': typeof AsyncRoute
   '/app/$appId': typeof AppAppIdRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app/$appId' | '/app'
+  fullPaths: '/' | '/async' | '/app/$appId' | '/app'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app/$appId' | '/app'
-  id: '__root__' | '/' | '/app/$appId' | '/app/'
+  to: '/' | '/async' | '/app/$appId' | '/app'
+  id: '__root__' | '/' | '/async' | '/app/$appId' | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AsyncRoute: typeof AsyncRoute
   AppAppIdRoute: typeof AppAppIdRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/async': {
+      id: '/async'
+      path: '/async'
+      fullPath: '/async'
+      preLoaderRoute: typeof AsyncRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AsyncRoute: AsyncRoute,
   AppAppIdRoute: AppAppIdRoute,
   AppIndexRoute: AppIndexRoute,
 }

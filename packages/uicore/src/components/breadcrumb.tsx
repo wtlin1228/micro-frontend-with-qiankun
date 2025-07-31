@@ -1,6 +1,7 @@
 import {
   createContext,
   PropsWithChildren,
+  Suspense,
   useContext,
   useMemo,
   useReducer,
@@ -8,7 +9,7 @@ import {
 
 type Item = {
   pushedBy: string;
-  title: string;
+  title: string | Promise<string>;
   onClick: () => void;
 };
 
@@ -19,7 +20,11 @@ type State = {
 type Action =
   | {
       type: "PUSH";
-      payload: { pushedBy: string; title: string; onClick: () => void };
+      payload: {
+        pushedBy: string;
+        title: string | Promise<string>;
+        onClick: () => void;
+      };
     }
   | {
       type: "POP";
@@ -94,9 +99,12 @@ export const Breadcrumb = () => {
   return (
     <div style={{ display: "flex", gap: "8px", marginBlock: "8px" }}>
       <p style={{ display: "inline", margin: 0 }}>Breadcrumb:</p>
-      {state.items.map((item) => (
-        <button key={item.title} onClick={item.onClick}>
-          {item.title}
+      {state.items.map((item, idx) => (
+        <button
+          key={idx} // don't blame me for using index as key since it just a demo
+          onClick={item.onClick}
+        >
+          <Suspense fallback={<>loading...</>}>{item.title}</Suspense>
         </button>
       ))}
     </div>

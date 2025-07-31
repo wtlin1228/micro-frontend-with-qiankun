@@ -14,6 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: src/routes/__root.tsx:12
+#: src/routes/__root.tsx:14
 msgid "pikmin"
 msgstr "Pikmin Home"
