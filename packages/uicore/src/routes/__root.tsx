@@ -1,8 +1,15 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 // import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { MicroApps } from "../components/micro-apps";
+import { Breadcrumb } from "../components/breadcrumb";
 
 export const Route = createRootRoute({
+  onEnter: () => {
+    console.log("root:onEnter");
+  },
+  onLeave: () => {
+    console.log("root:onLeave");
+  },
   component: () => (
     <>
       <div>
@@ -25,6 +32,7 @@ export const Route = createRootRoute({
         </Link>
       </div>
       <hr />
+      <Breadcrumb />
       <Outlet />
       <MicroApps />
       {/* <TanStackRouterDevtools /> */}

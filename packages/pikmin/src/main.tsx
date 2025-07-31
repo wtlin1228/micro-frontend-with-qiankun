@@ -1,6 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot, Root } from "react-dom/client";
 import App from "./App.tsx";
+import { Dispatch } from "./types";
+
+const DEBUG: 0 | 1 | 2 | 3 = 0;
+const log = (...args: any[]) => {
+  if (DEBUG) {
+    console.log(...args);
+  }
+};
 
 let root: Root | null = null;
 
@@ -11,15 +19,20 @@ let root: Root | null = null;
  * such as application-level caches that will not be destroyed during the unmount phase.
  */
 export async function bootstrap() {
-  console.log("pikmin app bootstrap");
+  if (DEBUG > 0) {
+    log("pikmin app bootstrap");
+  }
 }
 
 /**
  * The mount method is called every time the application enters,
  * usually we trigger the application's rendering method here.
  */
-export async function mount(props: { container?: HTMLElement }) {
-  console.log("pikmin app mount", props);
+export async function mount(props: {
+  container?: HTMLElement;
+  dispatch: Dispatch;
+}) {
+  log("pikmin app mount", props);
 
   if (!root) {
     const container = props.container
@@ -30,7 +43,7 @@ export async function mount(props: { container?: HTMLElement }) {
 
   root.render(
     <StrictMode>
-      <App />
+      <App dispatch={props.dispatch} />
     </StrictMode>
   );
 }
@@ -40,7 +53,7 @@ export async function mount(props: { container?: HTMLElement }) {
  * usually in this case we uninstall the application instance of the subapplication.
  */
 export async function unmount(props: any) {
-  console.log("pikmin app unmount", props);
+  log("pikmin app unmount", props);
 
   if (root) {
     root.unmount();
@@ -52,5 +65,5 @@ export async function unmount(props: any) {
  * Optional lifecycle，just available with loadMicroApp way
  */
 export async function update(props: any) {
-  console.log("pikmin app update", props);
+  log("pikmin app update", props);
 }
