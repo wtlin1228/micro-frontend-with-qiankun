@@ -1,53 +1,27 @@
-import { Button, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { Dispatch } from "./types";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./router";
 
 const theme = createTheme({
   cssVariables: true,
 });
 
+const RouterWithContext = (props: { dispatch: Dispatch }) => {
+  // const { i18n } = useLingui();
+  return (
+    <RouterProvider
+      router={router}
+      context={{ dispatch: props.dispatch, i18n: undefined }}
+    />
+  );
+};
+
 function App(props: { dispatch: Dispatch }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <h1>Kirby</h1>
-
-      <Button
-        variant="contained"
-        onClick={() =>
-          props.dispatch({
-            type: "PUSH",
-            payload: {
-              item: {
-                title: "Kirby",
-                onClick: () => {
-                  console.log("kirby");
-                },
-              },
-            },
-          })
-        }
-      >
-        Add Kirby to breadbrumb
-      </Button>
-
-      <Button
-        variant="contained"
-        onClick={() =>
-          props.dispatch({
-            type: "PUSH",
-            payload: {
-              item: {
-                title: "Waddle",
-                onClick: () => {
-                  console.log("Waddle");
-                },
-              },
-            },
-          })
-        }
-      >
-        Add Waddle to breadbrumb
-      </Button>
+      <RouterWithContext dispatch={props.dispatch} />
     </ThemeProvider>
   );
 }

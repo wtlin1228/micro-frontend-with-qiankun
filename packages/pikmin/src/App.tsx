@@ -1,47 +1,19 @@
 import { Dispatch } from "./types";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./router";
+
+const RouterWithContext = (props: { dispatch: Dispatch }) => {
+  // const { i18n } = useLingui();
+  return (
+    <RouterProvider
+      router={router}
+      context={{ dispatch: props.dispatch, i18n: undefined }}
+    />
+  );
+};
 
 function App(props: { dispatch: Dispatch }) {
-  return (
-    <>
-      <h1>Pikmin</h1>
-
-      <button
-        onClick={() =>
-          props.dispatch({
-            type: "PUSH",
-            payload: {
-              item: {
-                title: "Pikmin",
-                onClick: () => {
-                  console.log("Pikmin");
-                },
-              },
-            },
-          })
-        }
-      >
-        Add Pikmin to breadbrumb
-      </button>
-
-      <button
-        onClick={() =>
-          props.dispatch({
-            type: "PUSH",
-            payload: {
-              item: {
-                title: "Oatchi",
-                onClick: () => {
-                  console.log("Oatchi");
-                },
-              },
-            },
-          })
-        }
-      >
-        Add Oatchi to breadbrumb
-      </button>
-    </>
-  );
+  return <RouterWithContext dispatch={props.dispatch} />;
 }
 
 export default App;

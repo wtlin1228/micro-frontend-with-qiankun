@@ -1,16 +1,10 @@
-export type Item = {
-  title: string;
-  onClick: () => void;
-};
-
-export type Action =
+type Action =
   | {
       type: "PUSH";
-      payload: { item: Item };
+      payload: { title: string; onClick: () => void };
     }
   | {
       type: "POP";
-      payload: never;
     };
 
 export type Dispatch = React.ActionDispatch<[action: Action]>;
