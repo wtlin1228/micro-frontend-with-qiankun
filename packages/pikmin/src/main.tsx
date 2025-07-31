@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot, Root } from "react-dom/client";
 import App from "./App.tsx";
 import { Dispatch } from "./types";
+import { getLocale, loadCatalog } from "./i18n.tsx";
 
 const DEBUG: 0 | 1 | 2 | 3 = 0;
 const log = (...args: any[]) => {
@@ -33,6 +34,8 @@ export async function mount(props: {
   dispatch: Dispatch;
 }) {
   log("pikmin app mount", props);
+
+  await loadCatalog(getLocale());
 
   if (!root) {
     const container = props.container

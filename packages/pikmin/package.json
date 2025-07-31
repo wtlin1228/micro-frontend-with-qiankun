@@ -5,17 +5,25 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "messages:extract": "lingui extract",
+    "messages:compile": "lingui compile",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "all": "pnpm messages:extract && pnpm messages:compile && pnpm build && pnpm preview"
   },
   "dependencies": {
+    "@lingui/core": "^5.3.3",
+    "@lingui/react": "^5.3.3",
     "@tanstack/react-router": "^1.130.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@lingui/cli": "^5.3.3",
+    "@lingui/swc-plugin": "^5.5.2",
+    "@lingui/vite-plugin": "^5.3.3",
     "@tanstack/router-plugin": "^1.130.8",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
